@@ -234,6 +234,9 @@
                   <Font name="Tahoma" size="20" style="1"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtvalorvendaKeyReleased"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="&#xa;&#xa;new utilitarios.JTextFieldHint(new JTextField(),null ,&quot;Valor&quot;)"/>
               </AuxValues>
@@ -302,6 +305,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btsalvarActionPerformed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btsalvarKeyReleased"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">

@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import model.bean.Funcionario;
 import model.dao.FuncionarioDao;
+import utilitarios.KeyMappingUtil;
 
 /**
  *
@@ -221,7 +222,7 @@ public class Login extends javax.swing.JFrame {
 
     private void txtsenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtsenhaKeyReleased
         // TODO add your handling code here:
-        if (evt.getKeyCode() == 10) {
+        if (evt.getKeyCode() == KeyMappingUtil.KEY_ENTER) {
             this.realizarLogin();
         }
     }//GEN-LAST:event_txtsenhaKeyReleased

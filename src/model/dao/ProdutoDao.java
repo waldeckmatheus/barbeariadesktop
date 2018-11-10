@@ -120,7 +120,7 @@ public class ProdutoDao implements CrudDao<Produto> {
     public ArrayList<Produto> filtrarPorNome(String nome) {
         this.listaTabela = new ArrayList<>();
         try {
-            pstm = con.prepareStatement("select "+columns+" from produto where produtonome like ?");
+            pstm = con.prepareStatement("select "+columns+" from produto where prodnome like ?");
             pstm.setString(1, "%" + nome + "%");
             rs = pstm.executeQuery();
             while (rs.next()) {

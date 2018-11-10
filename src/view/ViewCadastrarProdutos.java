@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import model.bean.Produto;
 import model.dao.ProdutoDao;
+import utilitarios.KeyMappingUtil;
 
 /**
  *
@@ -145,6 +146,11 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
         txtvalorcompra.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
 
         txtvalorvenda.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
+        txtvalorvenda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtvalorvendaKeyReleased(evt);
+            }
+        });
 
         txtdescricao.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
 
@@ -224,6 +230,11 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
                 btsalvarActionPerformed(evt);
             }
         });
+        btsalvar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btsalvarKeyReleased(evt);
+            }
+        });
 
         lbtitulo.setBackground(new java.awt.Color(255, 255, 255));
         lbtitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -299,6 +310,10 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btcancelActionPerformed
 
     private void btsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsalvarActionPerformed
+        this.salvarOuAlterar();
+
+    }//GEN-LAST:event_btsalvarActionPerformed
+    public void salvarOuAlterar() {
         try {
             Produto produto = new Produto();
             switch (opcao) {
@@ -320,9 +335,12 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
                     produto.setProdDataAtualizacao(new Date());
                     produto.setProdNome(txtnome.getText());
                     produto.setProdDescricao(txtdescricao.getText());
-                    produto.setProdValorCompra(Float.parseFloat(txtvalorcompra.getText()));
-                    produto.setProdValorVenda(Float.parseFloat(txtvalorvenda.getText()));
-
+                    try {
+                        produto.setProdValorCompra(Float.parseFloat(txtvalorcompra.getText()));
+                        produto.setProdValorVenda(Float.parseFloat(txtvalorvenda.getText()));
+                    } catch (NumberFormatException e) {
+                        throw new InvalidFieldException();
+                    }
                     dao.alterar(produto);
                     this.dispose();
                     break;
@@ -331,8 +349,20 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
         } catch (InvalidFieldException e) {
             System.out.println("Não foi preenchido corretamente os campos do formulário");
         }
+    }
+    private void txtvalorvendaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorvendaKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyMappingUtil.KEY_ENTER) {
+            this.salvarOuAlterar();
+        }
+    }//GEN-LAST:event_txtvalorvendaKeyReleased
 
-    }//GEN-LAST:event_btsalvarActionPerformed
+    private void btsalvarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btsalvarKeyReleased
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyMappingUtil.KEY_ENTER) {
+            this.salvarOuAlterar();
+        }
+    }//GEN-LAST:event_btsalvarKeyReleased
 
     public void validar() throws InvalidFieldException {
         if (txtnome.getText().equals("")) {
@@ -389,7 +419,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
 //                dialog.setVisible(true);
 //            }
 //        });
-        
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
