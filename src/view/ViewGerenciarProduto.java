@@ -20,18 +20,21 @@ import model.dao.ProdutoDao;
  */
 public class ViewGerenciarProduto extends javax.swing.JFrame {
 
-    int pcod = 0;
+    private int pcod;
     private final ProdutoDao dao;
     private DefaultTableModel modelo;
     private final Funcionario funcionario;
 
+    private final String mensagemItemNaoSelecionado = "Nenhum produto foi selecionado, por favor selecionar.";
+    private final String mensagemItemExclusao = "Deseja realmente EXCLUIR o produto ?";
     /**
      * Creates new form Cliente
      * @param funcionario
      */
     public ViewGerenciarProduto(Funcionario funcionario) {
+        this.pcod = 0;
         this.funcionario = funcionario;
-        dao = new ProdutoDao();
+        this.dao = new ProdutoDao();
         //------------------------
         this.initComponents();
         this.txtpesqnome.requestFocus();
@@ -52,10 +55,10 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
         ImageIcon icon=new ImageIcon(getClass().getResource("/imagens/barbeiro2.jpg")); Image image = icon.getImage();
         jPanel1 = new javax.swing.JPanel(){  public void paintComponent(Graphics g){ g.drawImage(image,0,0,getWidth(),getHeight(),this); }  };
         jPanel2 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btCadastrar = new javax.swing.JButton();
+        btAlterar = new javax.swing.JButton();
+        btVisualizar = new javax.swing.JButton();
+        btExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel(){  public void paintComponent(Graphics g){ g.drawImage(image,0,0,getWidth(),getHeight(),this); }  };
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -73,51 +76,51 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(36, 47, 65));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 51));
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-mais-80 (1) (2).png"))); // NOI18N
-        jButton4.setText("Cadastrar");
-        jButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btCadastrar.setBackground(new java.awt.Color(0, 153, 51));
+        btCadastrar.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btCadastrar.setForeground(new java.awt.Color(255, 255, 255));
+        btCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-mais-80 (1) (2).png"))); // NOI18N
+        btCadastrar.setText("Cadastrar");
+        btCadastrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btCadastrarActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 106, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-lápis-80 (2).png"))); // NOI18N
-        jButton1.setText("Alterar");
-        jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btAlterar.setBackground(new java.awt.Color(255, 106, 0));
+        btAlterar.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btAlterar.setForeground(new java.awt.Color(255, 255, 255));
+        btAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-lápis-80 (2).png"))); // NOI18N
+        btAlterar.setText("Alterar");
+        btAlterar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btAlterarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(90, 128, 205));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-visualizar-arquivo-64 (2).png"))); // NOI18N
-        jButton2.setText("Visualizar");
-        jButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btVisualizar.setBackground(new java.awt.Color(90, 128, 205));
+        btVisualizar.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btVisualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-visualizar-arquivo-64 (2).png"))); // NOI18N
+        btVisualizar.setText("Visualizar");
+        btVisualizar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btVisualizarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(204, 0, 0));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-cancelar-64 (1).png"))); // NOI18N
-        jButton3.setText("Excluir");
-        jButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btExcluir.setBackground(new java.awt.Color(204, 0, 0));
+        btExcluir.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-cancelar-64 (1).png"))); // NOI18N
+        btExcluir.setText("Excluir");
+        btExcluir.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btExcluirActionPerformed(evt);
             }
         });
 
@@ -132,10 +135,10 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btVisualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btAlterar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -144,13 +147,13 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(73, 73, 73)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -272,15 +275,15 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
 
         ViewCadastrarProdutos v = new ViewCadastrarProdutos(this, true, 1, pcod, this.funcionario);
         v.setVisible(true);
 
         preecherTabelaProduto();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btCadastrarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
         if (tbprodutos.getSelectedColumn() != -1) {
             int cod;
             cod = (int) tbprodutos.getValueAt(tbprodutos.getSelectedRow(), 0);
@@ -291,15 +294,15 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
             preecherTabelaProduto();
         } else {
 
-            JOptionPane.showMessageDialog(rootPane, "Nenhum Funcionário Selecionado,favor selecione.");
+            JOptionPane.showMessageDialog(rootPane, this.mensagemItemNaoSelecionado);
         }
 
         tbprodutos.clearSelection();
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btAlterarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
 
         if (tbprodutos.getSelectedColumn() != -1) {
             int cod;
@@ -310,19 +313,18 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
 
             preecherTabelaProduto();
         } else {
-
-            JOptionPane.showMessageDialog(rootPane, "Nenhum produto foi selecionado, por favor selecionar");
+            JOptionPane.showMessageDialog(rootPane, this.mensagemItemNaoSelecionado);
         }
 
         tbprodutos.clearSelection();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btVisualizarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         if (tbprodutos.getSelectedColumn() != -1) {
             int cod, resposta;
 
             cod = (int) tbprodutos.getValueAt(tbprodutos.getSelectedRow(), 0);
-            resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja Realmente Excluir o Produto ?", "Aviso", 1);
+            resposta = JOptionPane.showConfirmDialog(rootPane, this.mensagemItemExclusao, "Aviso", 1);
             if (resposta == JOptionPane.YES_OPTION) {
                 dao.deletar(cod);
                 preecherTabelaProduto();
@@ -330,11 +332,11 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
 
         } else {
 
-            JOptionPane.showMessageDialog(rootPane, "Nenhum Funcionário Selecionado,favor selecione.");
+            JOptionPane.showMessageDialog(rootPane, this.mensagemItemNaoSelecionado);
         }
-
+                
         tbprodutos.clearSelection();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btExcluirActionPerformed
 
     private void txtpesqnomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpesqnomeKeyReleased
         if (txtpesqnome.getText().isEmpty()) {
@@ -504,10 +506,10 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btAlterar;
+    private javax.swing.JButton btCadastrar;
+    private javax.swing.JButton btExcluir;
+    private javax.swing.JButton btVisualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

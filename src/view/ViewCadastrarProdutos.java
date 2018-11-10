@@ -29,6 +29,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
     private int opcao, pcod;
     private ProdutoDao dao;
     private Funcionario funcionario;
+
     /**
      * Creates new form view_CadastrarCliente
      *
@@ -309,7 +310,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btcancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcancelActionPerformed
-        hide();
+        this.dispose();
     }//GEN-LAST:event_btcancelActionPerformed
 
     private void btsalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsalvarActionPerformed
