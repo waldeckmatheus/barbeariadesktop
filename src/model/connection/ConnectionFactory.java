@@ -7,6 +7,7 @@ package model.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +24,7 @@ public class ConnectionFactory {
             String login = "root";
             String senha = "121334";
             con = DriverManager.getConnection(url, login, senha);
-        } catch (Exception erro) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException erro) {
             JOptionPane.showMessageDialog(null, "Erro de conexão" + erro.getMessage());
 
         }

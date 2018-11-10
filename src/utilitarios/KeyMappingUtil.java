@@ -7,7 +7,7 @@ package utilitarios;
 
 /**
  *
- * @author root
+ * @author Equipe barbearia
  */
 public class KeyMappingUtil {
     public static int KEY_ENTER = 10;

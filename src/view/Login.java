@@ -41,11 +41,17 @@ public class Login extends javax.swing.JFrame {
         //jPanel3.setBackground(new Color(0, 0, 0, 140));
         jPanel2.setBackground(new Color(0, 0, 0, 140));
     }
-
+    public String getPassword(){
+        StringBuilder sb = new StringBuilder();
+        for (char c: txtsenha.getPassword()){
+            sb.append(String.valueOf(c));
+        }
+        return sb.toString();
+    }
     public void realizarLogin() {
         String login, senha;
         login = txtlogin.getText();
-        senha = txtsenha.getText();
+        senha = getPassword();
 
         try {
             Funcionario funcionario = funcionarioDAO.consultarByLoginSenha(login, senha);
