@@ -24,6 +24,8 @@ public class ViewGerenciarFuncionario extends javax.swing.JFrame {
     private DefaultTableModel modelo;
     private final Funcionario funcionario;
 
+    private static final String mensagemPermissaoAcesso = "Você não tem permissão para acessar o gerenciamento de Funcionário.";
+
     /**
      * Creates new form Cliente
      *
@@ -31,13 +33,20 @@ public class ViewGerenciarFuncionario extends javax.swing.JFrame {
      */
     public ViewGerenciarFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-        dao = new FuncionarioDao();
-        //------------------------
-        this.initComponents();
-        this.txtpesqnome.requestFocus();
-        //------------------------
-        this.preecherTabelaFuncionario();
-        this.ajustarLayout();
+
+        if (this.funcionario.getFuncao().toLowerCase().trim().equals("administrador")) {
+            dao = new FuncionarioDao();
+            //------------------------
+            this.initComponents();
+            this.txtpesqnome.requestFocus();
+            //------------------------
+            this.preecherTabelaFuncionario();
+            this.ajustarLayout();
+        } else {
+            this.dao = null;
+            JOptionPane.showMessageDialog(null, mensagemPermissaoAcesso);
+        }
+
     }
 
     /**
