@@ -41,7 +41,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
         this.dao = new ProdutoDao();
 
         initComponents();
-        this.ajustarVisual();
+        this.ajustarLayout();
 
         pcod = cod;
         opcao = op;
@@ -62,7 +62,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
         }
     }
 
-    private void ajustarVisual() {
+    private void ajustarLayout() {
         jPanel1.setBackground(new Color(0, 0, 0, 140));
         jPanel2.setBackground(new Color(0, 0, 0, 140));
     }

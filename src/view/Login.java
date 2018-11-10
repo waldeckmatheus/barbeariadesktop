@@ -33,10 +33,10 @@ public class Login extends javax.swing.JFrame {
         this.funcionarioDAO = new FuncionarioDao();
         
         initComponents();
-        this.ajustarVisual();
+        this.ajustarLayout();
     }
 
-    private void ajustarVisual() {
+    private void ajustarLayout() {
         jPanel1.setBackground(new Color(0, 0, 0, 150));
         //jPanel3.setBackground(new Color(0, 0, 0, 140));
         jPanel2.setBackground(new Color(0, 0, 0, 140));

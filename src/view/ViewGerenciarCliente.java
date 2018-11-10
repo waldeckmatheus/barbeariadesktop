@@ -19,7 +19,7 @@ import model.bean.Funcionario;
  * @author Equipe barbearia
  */
 public class ViewGerenciarCliente extends javax.swing.JFrame {
-    private Funcionario funcionario;
+    private final Funcionario funcionario;
     
     /**
      * Creates new form view_cadastrarFuncionarios
@@ -28,7 +28,11 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
     public ViewGerenciarCliente(Funcionario funcionario) {
         this.funcionario = funcionario;
         initComponents();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+       
+        this.ajustarLayout();
+    }
+    public void ajustarLayout(){
+         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jPanel2.setBackground(new Color(0, 0, 0, 140));
         jPanel3.setBackground(new Color(0, 0, 0, 140));
@@ -58,7 +62,6 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
         //tbcliente.setSelectionForeground(Color.white);
         tbcliente.setSelectionBackground(new Color(255, 255, 255, 100));
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -24,7 +24,7 @@ import model.dao.FuncionarioDao;
 public class ViewCadastrarFuncionarios extends javax.swing.JDialog {
 
     int opcao, pcod;
-
+    private FuncionarioDao dao;
     /**
      * Creates new form view_CadastrarCliente
      * @param parent
@@ -34,10 +34,9 @@ public class ViewCadastrarFuncionarios extends javax.swing.JDialog {
      */
     public ViewCadastrarFuncionarios(java.awt.Frame parent, boolean modal, int op, int cod) {
         super(parent, modal);
+        this.dao = new FuncionarioDao();
         initComponents();
-
-        jPanel1.setBackground(new Color(0, 0, 0, 140));
-        jPanel2.setBackground(new Color(0, 0, 0, 140));
+        this.ajustarLayout();
         pcod = cod;
         opcao = op;
 
@@ -56,16 +55,16 @@ public class ViewCadastrarFuncionarios extends javax.swing.JDialog {
                 break;
         }
     }
-
+    public void ajustarLayout(){
+        jPanel1.setBackground(new Color(0, 0, 0, 140));
+        jPanel2.setBackground(new Color(0, 0, 0, 140));
+    }
     private ViewCadastrarFuncionarios(JFrame jFrame, boolean b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private void setaNaTelaOsDados(int cod) {
-
-        FuncionarioDao fdao = new FuncionarioDao();
-
-        List<Funcionario> lista = fdao.pesquisarPorCodigo(cod);
+        List<Funcionario> lista = dao.pesquisarPorCodigo(cod);
         for (Funcionario p : lista) {
             if (p.getFunCod() == cod) {
                 txtnome.setText(p.getFunNome());

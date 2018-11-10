@@ -37,7 +37,7 @@ public class ViewGerenciarFuncionario extends javax.swing.JFrame {
         this.txtpesqnome.requestFocus();
         //------------------------
         this.preecherTabelaFuncionario();
-        this.ajustarVisual();
+        this.ajustarLayout();
     }
 
     /**
@@ -342,7 +342,7 @@ public class ViewGerenciarFuncionario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtpesqnomeKeyReleased
 
-    private void ajustarVisual() {
+    private void ajustarLayout() {
         jPanel2.setBackground(new Color(0, 0, 0, 140));
         jPanel3.setBackground(new Color(0, 0, 0, 140));
         jPanel4.setBackground(new Color(0, 0, 0, 120));
