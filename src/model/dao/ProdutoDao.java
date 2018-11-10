@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,12 +22,13 @@ import model.connection.ConnectionFactory;
  * @author Equipe barbearia
  */
 public class ProdutoDao implements CrudDao<Produto> {
-
     private Connection con = new ConnectionFactory().getConection();
     private PreparedStatement pstm;
     private ResultSet rs;
     private String sql;
-    private String columns = "prodcod,proddatainsercao,proddataatualizacao,prodnome,proddescricao, prodvalorcompra,prodvalorvenda";
+    private final String columns = "prodcod,proddatainsercao,proddataatualizacao,prodnome,proddescricao, prodvalorcompra,prodvalorvenda";
+    private ArrayList<Produto> listaTabela;
+    
     @Override
     public void salvar(Produto produto) {
         try {
@@ -50,9 +52,8 @@ public class ProdutoDao implements CrudDao<Produto> {
 
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso.");
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível inserir o produto." + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -66,14 +67,14 @@ public class ProdutoDao implements CrudDao<Produto> {
 
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null, "Excluido com Sucesso.");
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "erro alterarPreparet" + e.getMessage());
         }
     }
 
     @Override
     public List<Produto> listar() {
-        ArrayList<Produto> listaTabela = new ArrayList<Produto>();
+        this.listaTabela = new ArrayList<>();
         try {
             sql = "select "+columns+" from produto";
             pstm = con.prepareStatement(sql);
@@ -88,12 +89,12 @@ public class ProdutoDao implements CrudDao<Produto> {
                 produto.setProdValorCompra(rs.getFloat(6));
                 produto.setProdValorVenda(rs.getFloat(7));
 
-                listaTabela.add(produto);
+                this.listaTabela.add(produto);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Não foi possivel listar os produtos! ." + e.getMessage());
         }
-        return listaTabela;
+        return this.listaTabela;
     }
 
     @Override
@@ -111,13 +112,13 @@ public class ProdutoDao implements CrudDao<Produto> {
 
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso.");
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "erro alterar cliente" + e.getMessage());
         }
     }
 
     public ArrayList<Produto> filtrarPorNome(String nome) {
-        ArrayList<Produto> listaTabela = new ArrayList<Produto>();
+        this.listaTabela = new ArrayList<>();
         try {
             pstm = con.prepareStatement("select "+columns+" from produto where produtonome like ?");
             pstm.setString(1, "%" + nome + "%");
@@ -130,14 +131,14 @@ public class ProdutoDao implements CrudDao<Produto> {
                 listaTabela.add(produto);
 
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao filtrar por nome: " + e.getMessage());
         }
         return listaTabela;
     }
 
     public ArrayList<Produto> pesquisarPorCodigo(int cod) {
-        ArrayList<Produto> listaTabela = new ArrayList<Produto>();
+        this.listaTabela = new ArrayList<>();
         try {
             pstm = con.prepareStatement("select "+columns+" from produto where prodcod = '" + cod + "' ");
 
@@ -148,9 +149,8 @@ public class ProdutoDao implements CrudDao<Produto> {
                 
                 listaTabela.add(produto);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar por código" + e.getMessage());
-            e.printStackTrace();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao listar por código: " + e.getMessage());
         }
         return listaTabela;
     }
