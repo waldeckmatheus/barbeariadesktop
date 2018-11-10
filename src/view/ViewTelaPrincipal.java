@@ -130,7 +130,9 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        if (this.funcionario.getFuncao().toLowerCase().trim().equals("administrador")){
+            jMenu1.add(jMenuItem2);
+        }
 
         jMenuItem3.setText("Produto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
