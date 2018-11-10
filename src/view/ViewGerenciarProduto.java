@@ -21,7 +21,7 @@ import model.dao.ProdutoDao;
 public class ViewGerenciarProduto extends javax.swing.JFrame {
 
     int pcod = 0;
-    private ProdutoDao dao;
+    private final ProdutoDao dao;
     private DefaultTableModel modelo;
     private final Funcionario funcionario;
 
@@ -463,11 +463,11 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
 //                new ViewGerenciarProduto().setVisible(true);
-            }
-        });
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

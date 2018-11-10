@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import model.bean.Funcionario;
 
 /*
@@ -19,7 +18,7 @@ import model.bean.Funcionario;
  */
 public class ViewTelaPrincipal extends javax.swing.JFrame {
 
-    private Funcionario funcionario;
+    private final Funcionario funcionario;
 
     public ViewTelaPrincipal(Funcionario funcionario) {
         this.funcionario = funcionario;
@@ -27,7 +26,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         this.ajustarVisual();
     }
 
-    public void ajustarVisual() {
+    private void ajustarVisual() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         jMenuBar1.setBackground(new Color(255, 255, 255, 120));
         jPanel1.setBackground(new Color(0, 0, 0, 120));
@@ -196,11 +195,11 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
 //                new ViewTelaPrincipal().setVisible(true);
-            }
-        });
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

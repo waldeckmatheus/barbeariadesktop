@@ -17,19 +17,25 @@ public class ViewCadastrarClientes extends javax.swing.JDialog {
 
     /**
      * Creates new form view_cadastro_funcionario
+     * @param parent
+     * @param modal
+     * @param op
      */
     public ViewCadastrarClientes(java.awt.Frame parent, boolean modal, int op) {
         super(parent, modal);
         initComponents();
 
-        if (op == 1) {
-        } else if (op == 2) {
-            lbtitulo.setText("Alterar Funcionario");
-            btsalvar.setText("Alterar");
-        } else {
-            lbtitulo.setText("Visualizar Funcionario");
-            btsalvar.setEnabled(false);
-
+        switch (op) {
+            case 1:
+                break;
+            case 2:
+                lbtitulo.setText("Alterar Funcionario");
+                btsalvar.setText("Alterar");
+                break;
+            default:
+                lbtitulo.setText("Visualizar Funcionario");
+                btsalvar.setEnabled(false);
+                break;
         }
     }
 
@@ -283,18 +289,18 @@ public class ViewCadastrarClientes extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ViewCadastrarClientes dialog = new ViewCadastrarClientes(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                ViewCadastrarClientes dialog = new ViewCadastrarClientes(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
