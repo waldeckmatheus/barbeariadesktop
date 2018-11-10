@@ -20,6 +20,7 @@ import model.connection.ConnectionFactory;
  * @author Equipe barbearia
  */
 public class FuncionarioDao implements CrudDao<Funcionario> {
+
     private Connection con = new ConnectionFactory().getConection();
     private PreparedStatement pstm;
     private ResultSet rs;
@@ -183,4 +184,30 @@ public class FuncionarioDao implements CrudDao<Funcionario> {
         pstm.close();
         return funcionario;
     }
+
+    /**
+     * O método consulta os dados do funcionário sem apresentar login e senha
+     *
+     * @param cod
+     *
+     * @throws SQLException
+     */
+    public Funcionario consultarByCod(int cod) throws SQLException {
+        Funcionario funcionario = null;
+
+        pstm = con.prepareStatement("select funcod, funnome,funcao,funpercent from funcionario where funcod = ?");
+        pstm.setInt(1, cod);
+        rs = pstm.executeQuery();
+        if (rs.first()) {
+            funcionario = new Funcionario();
+            funcionario.setFunCod((rs.getInt(1)));
+            funcionario.setFunNome(rs.getString(2));
+            funcionario.setFuncao(rs.getString(3));
+            funcionario.setFunPercent(rs.getInt(4));
+        }
+        rs.close();
+        pstm.close();
+        return funcionario;
+    }
+
 }

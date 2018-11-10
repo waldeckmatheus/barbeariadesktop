@@ -274,7 +274,7 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        ViewCadastrarProdutos v = new ViewCadastrarProdutos(this, true, 1, pcod);
+        ViewCadastrarProdutos v = new ViewCadastrarProdutos(this, true, 1, pcod, this.funcionario);
         v.setVisible(true);
 
         preecherTabelaProduto();
@@ -285,7 +285,7 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
             int cod;
             cod = (int) tbprodutos.getValueAt(tbprodutos.getSelectedRow(), 0);
             pcod = cod;
-            ViewCadastrarProdutos v = new ViewCadastrarProdutos(this, true, 2, pcod);
+            ViewCadastrarProdutos v = new ViewCadastrarProdutos(this, true, 2, pcod, this.funcionario);
             v.setVisible(true);
 
             preecherTabelaProduto();
@@ -305,7 +305,7 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
             int cod;
             cod = (int) tbprodutos.getValueAt(tbprodutos.getSelectedRow(), 0);
             pcod = cod;
-            ViewCadastrarProdutos v = new ViewCadastrarProdutos(this, true, 3, pcod);
+            ViewCadastrarProdutos v = new ViewCadastrarProdutos(this, true, 3, pcod,this.funcionario);
             v.setVisible(true);
 
             preecherTabelaProduto();

@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import model.bean.Funcionario;
 import model.bean.Produto;
 import model.dao.ProdutoDao;
 import utilitarios.KeyMappingUtil;
@@ -27,7 +28,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
 
     private int opcao, pcod;
     private ProdutoDao dao;
-
+    private Funcionario funcionario;
     /**
      * Creates new form view_CadastrarCliente
      *
@@ -35,9 +36,11 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
      * @param modal
      * @param op
      * @param cod
+     * @param funcionario
      */
-    public ViewCadastrarProdutos(java.awt.Frame parent, boolean modal, int op, int cod) {
+    public ViewCadastrarProdutos(java.awt.Frame parent, boolean modal, int op, int cod, Funcionario funcionario) {
         super(parent, modal);
+        this.funcionario = funcionario;
         this.dao = new ProdutoDao();
 
         initComponents();
@@ -324,7 +327,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
                     produto.setProdDescricao(txtdescricao.getText());
                     produto.setProdValorCompra(Float.parseFloat(txtvalorcompra.getText()));
                     produto.setProdValorVenda(Float.parseFloat(txtvalorvenda.getText()));
-
+                    produto.setProdFuncionario(this.funcionario);
                     dao.salvar(produto);
 
                     this.dispose();
@@ -341,6 +344,7 @@ public class ViewCadastrarProdutos extends javax.swing.JDialog {
                     } catch (NumberFormatException e) {
                         throw new InvalidFieldException();
                     }
+                    produto.setProdFuncionario(this.funcionario);
                     dao.alterar(produto);
                     this.dispose();
                     break;

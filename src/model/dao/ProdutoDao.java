@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.bean.Funcionario;
 import model.bean.Produto;
 import model.connection.ConnectionFactory;
 
@@ -22,25 +23,28 @@ import model.connection.ConnectionFactory;
  * @author Equipe barbearia
  */
 public class ProdutoDao implements CrudDao<Produto> {
+
     private Connection con = new ConnectionFactory().getConection();
     private PreparedStatement pstm;
     private ResultSet rs;
     private String sql;
-    private final String columns = "prodcod,proddatainsercao,proddataatualizacao,prodnome,proddescricao, prodvalorcompra,prodvalorvenda";
+    private final String columns = "prodcod,proddatainsercao,proddataatualizacao,prodnome,proddescricao, prodvalorcompra,prodvalorvenda,prodfuncod";
     private ArrayList<Produto> listaTabela;
-    
+
+    private FuncionarioDao funcionarioDao;
+
     @Override
     public void salvar(Produto produto) {
         try {
             String columnsWithoutCod = columns.replace("prodcod,", "");
-            String []splitted = columnsWithoutCod.split(",");
+            String[] splitted = columnsWithoutCod.split(",");
             StringBuilder sb = new StringBuilder();
-            for (int i=0;i<splitted.length;i++){
+            for (int i = 0; i < splitted.length; i++) {
                 sb.append("?,");
             }
             String questionsChars = sb.toString();
-            questionsChars = questionsChars.substring(0,questionsChars.length()-1);
-            sql = "insert into produto("+columnsWithoutCod+") values ("+questionsChars+")";
+            questionsChars = questionsChars.substring(0, questionsChars.length() - 1);
+            sql = "insert into produto(" + columnsWithoutCod + ") values (" + questionsChars + ")";
             pstm = con.prepareStatement(sql);
 
             pstm.setDate(1, new java.sql.Date(produto.getProdDataInsercao().getTime()));
@@ -49,6 +53,7 @@ public class ProdutoDao implements CrudDao<Produto> {
             pstm.setString(4, produto.getProdDescricao());
             pstm.setFloat(5, produto.getProdValorCompra());
             pstm.setFloat(6, produto.getProdValorVenda());
+            pstm.setInt(7, produto.getProdFuncionario().getFunCod());
 
             pstm.execute();
             JOptionPane.showMessageDialog(null, "Cadastrado com sucesso.");
@@ -76,7 +81,7 @@ public class ProdutoDao implements CrudDao<Produto> {
     public List<Produto> listar() {
         this.listaTabela = new ArrayList<>();
         try {
-            sql = "select "+columns+" from produto";
+            sql = "select " + columns + " from produto";
             pstm = con.prepareStatement(sql);
             rs = pstm.executeQuery(sql);
             while (rs.next()) {
@@ -89,6 +94,13 @@ public class ProdutoDao implements CrudDao<Produto> {
                 produto.setProdValorCompra(rs.getFloat(6));
                 produto.setProdValorVenda(rs.getFloat(7));
 
+                if (funcionarioDao == null) {
+                    funcionarioDao = new FuncionarioDao();
+                }
+
+                Funcionario funcionario = funcionarioDao.consultarByCod(rs.getInt(8));
+                produto.setProdFuncionario(funcionario);
+
                 this.listaTabela.add(produto);
             }
         } catch (SQLException e) {
@@ -100,7 +112,7 @@ public class ProdutoDao implements CrudDao<Produto> {
     @Override
     public void alterar(Produto produto) {
         try {
-            sql = "update produto set proddataatualizacao = ?, prodnome= ?,proddescricao= ?, prodvalorcompra=?, prodvalorvenda=? where prodcod=?";
+            sql = "update produto set proddataatualizacao = ?, prodnome= ?,proddescricao= ?, prodvalorcompra=?, prodvalorvenda=?, prodfuncod= ? where prodcod=?";
             pstm = con.prepareStatement(sql);
 
             pstm.setDate(1, new java.sql.Date(new Date().getTime()));
@@ -108,7 +120,8 @@ public class ProdutoDao implements CrudDao<Produto> {
             pstm.setString(3, produto.getProdDescricao());
             pstm.setFloat(4, produto.getProdValorCompra());
             pstm.setFloat(5, produto.getProdValorVenda());
-            pstm.setInt(6, produto.getProdCod());
+            pstm.setInt(6, produto.getProdFuncionario().getFunCod());
+            pstm.setInt(7, produto.getProdCod());
 
             pstm.executeUpdate();
             JOptionPane.showMessageDialog(null, "Alterado com Sucesso.");
@@ -120,14 +133,14 @@ public class ProdutoDao implements CrudDao<Produto> {
     public ArrayList<Produto> filtrarPorNome(String nome) {
         this.listaTabela = new ArrayList<>();
         try {
-            pstm = con.prepareStatement("select "+columns+" from produto where prodnome like ?");
+            pstm = con.prepareStatement("select " + columns + " from produto where prodnome like ?");
             pstm.setString(1, "%" + nome + "%");
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Produto produto = new Produto();
-                
-                mapAll(produto,rs);
-                
+
+                mapAll(produto, rs);
+
                 listaTabela.add(produto);
 
             }
@@ -140,13 +153,13 @@ public class ProdutoDao implements CrudDao<Produto> {
     public ArrayList<Produto> pesquisarPorCodigo(int cod) {
         this.listaTabela = new ArrayList<>();
         try {
-            pstm = con.prepareStatement("select "+columns+" from produto where prodcod = '" + cod + "' ");
+            pstm = con.prepareStatement("select " + columns + " from produto where prodcod = '" + cod + "' ");
 
             rs = pstm.executeQuery();
             while (rs.next()) {
                 Produto produto = new Produto();
-                mapAll(produto,rs);
-                
+                mapAll(produto, rs);
+
                 listaTabela.add(produto);
             }
         } catch (SQLException e) {
@@ -154,7 +167,8 @@ public class ProdutoDao implements CrudDao<Produto> {
         }
         return listaTabela;
     }
-    public void mapAll(Produto produto, ResultSet rs) throws SQLException{
+
+    public void mapAll(Produto produto, ResultSet rs) throws SQLException {
         produto.setProdCod(rs.getInt(1));
         produto.setProdDataInsercao(rs.getTimestamp(2));
         produto.setProdDataAtualizacao(rs.getTimestamp(3));

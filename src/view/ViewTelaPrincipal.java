@@ -27,6 +27,8 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     }
 
     private void ajustarVisual() {
+        this.textDescricaoFuncaoUsuario.setText(this.funcionario.getFuncao().toUpperCase()+" - "+this.funcionario.getFunNome().toUpperCase());
+        this.textDescricaoFuncaoUsuario.setEditable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         jMenuBar1.setBackground(new Color(255, 255, 255, 120));
         jPanel1.setBackground(new Color(0, 0, 0, 120));
@@ -45,6 +47,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         ImageIcon icon1=new ImageIcon(getClass().getResource("/imagens/shutterstock_262651352_bw_small.jpg")); Image images1 = icon1.getImage();
         jPanel3 = new javax.swing.JPanel(){  public void paintComponent(Graphics g){ g.drawImage(images1,0,0,getWidth(),getHeight(),this); }  };
         jPanel1 = new javax.swing.JPanel();
+        textDescricaoFuncaoUsuario = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -65,17 +68,29 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
             .addGap(0, 873, Short.MAX_VALUE)
         );
 
+        textDescricaoFuncaoUsuario.setBackground(new java.awt.Color(204, 204, 255));
+        textDescricaoFuncaoUsuario.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        textDescricaoFuncaoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textDescricaoFuncaoUsuarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1074, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 715, Short.MAX_VALUE)
+                .addComponent(textDescricaoFuncaoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(textDescricaoFuncaoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jDesktopPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -164,6 +179,10 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
         c.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void textDescricaoFuncaoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDescricaoFuncaoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textDescricaoFuncaoUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -217,5 +236,6 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField textDescricaoFuncaoUsuario;
     // End of variables declaration//GEN-END:variables
 }

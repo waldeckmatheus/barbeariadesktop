@@ -19,11 +19,12 @@ public class Produto {
     private String prodDescricao;
     private Float prodValorCompra;
     private Float prodValorVenda;
+    private Funcionario prodFuncionario;
 
     public Produto() {
     }
 
-    public Produto(Integer prodCod, Date prodDataInsercao, Date prodDataAtualizacao, String prodNome, String prodDescricao, Float prodValorCompra, Float prodValorVenda) {
+    public Produto(Integer prodCod, Date prodDataInsercao, Date prodDataAtualizacao, String prodNome, String prodDescricao, Float prodValorCompra, Float prodValorVenda, Funcionario prodFuncionario) {
         this.prodCod = prodCod;
         this.prodDataInsercao = prodDataInsercao;
         this.prodDataAtualizacao = prodDataAtualizacao;
@@ -31,8 +32,12 @@ public class Produto {
         this.prodDescricao = prodDescricao;
         this.prodValorCompra = prodValorCompra;
         this.prodValorVenda = prodValorVenda;
+        this.prodFuncionario = prodFuncionario;
     }
-  
+
+    
+
+    
     public Date getProdDataInsercao() {
         return prodDataInsercao;
     }
@@ -92,5 +97,13 @@ public class Produto {
         this.prodValorVenda = prodValorVenda;
     }
 
+    public Funcionario getProdFuncionario() {
+        return prodFuncionario;
+    }
+
+    public void setProdFuncionario(Funcionario prodFuncionario) {
+        this.prodFuncionario = prodFuncionario;
+    }
+    
     
 }
