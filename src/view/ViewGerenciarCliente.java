@@ -79,6 +79,7 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btFecharJanela = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel(){  public void paintComponent(Graphics g){ g.drawImage(image,0,0,getWidth(),getHeight(),this); }  };
         jScrollPane1 = new javax.swing.JScrollPane();
         tbcliente = new javax.swing.JTable();
@@ -89,7 +90,7 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
         new utilitarios.JTextFieldHint(new JTextField(),"icons8-usuário-32" ,"Nome do Cliente.");
         jButton6 = new javax.swing.JButton();
 
-        setTitle("Gerenciar Funcionario");
+        setTitle("Gerenciamento de Cliente");
 
         jPanel1.setBackground(new java.awt.Color(104, 175, 245));
 
@@ -141,6 +142,19 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/login (7).jpg"))); // NOI18N
 
+        btFecharJanela.setBackground(new java.awt.Color(153, 153, 153));
+        btFecharJanela.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btFecharJanela.setForeground(new java.awt.Color(255, 255, 255));
+        btFecharJanela.setText("Fechar Janela");
+        btFecharJanela.setToolTipText("");
+        btFecharJanela.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btFecharJanela.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btFecharJanela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFecharJanelaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -154,6 +168,10 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
                         .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btFecharJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -169,7 +187,9 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btFecharJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(104, 175, 245));
@@ -209,7 +229,9 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 820, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,6 +328,11 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btFecharJanelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharJanelaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btFecharJanelaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -349,6 +376,7 @@ public class ViewGerenciarCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btFecharJanela;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

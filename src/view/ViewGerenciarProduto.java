@@ -60,6 +60,7 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
         btVisualizar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btFecharJanela = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel(){  public void paintComponent(Graphics g){ g.drawImage(image,0,0,getWidth(),getHeight(),this); }  };
         jScrollPane1 = new javax.swing.JScrollPane();
         tbprodutos = new javax.swing.JTable();
@@ -69,7 +70,7 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
 
         new utilitarios.JTextFieldHint(new JTextField(),null ,"Nome do produto");
 
-        setTitle("Gerenciar Cliente");
+        setTitle("Gerenciamento de Produto");
 
         jPanel1.setBackground(new java.awt.Color(104, 175, 245));
 
@@ -126,6 +127,19 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/login (7).jpg"))); // NOI18N
 
+        btFecharJanela.setBackground(new java.awt.Color(153, 153, 153));
+        btFecharJanela.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        btFecharJanela.setForeground(new java.awt.Color(255, 255, 255));
+        btFecharJanela.setText("Fechar Janela");
+        btFecharJanela.setToolTipText("");
+        btFecharJanela.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btFecharJanela.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btFecharJanela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFecharJanelaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -139,6 +153,10 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
                         .addComponent(btVisualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btAlterar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btFecharJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -154,7 +172,9 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
                 .addComponent(btVisualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btFecharJanela, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(104, 175, 245));
@@ -346,6 +366,11 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtpesqnomeKeyReleased
 
+    private void btFecharJanelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharJanelaActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btFecharJanelaActionPerformed
+
     private void ajustarLayout() {
         jPanel2.setBackground(new Color(0, 0, 0, 140));
         jPanel3.setBackground(new Color(0, 0, 0, 140));
@@ -509,6 +534,7 @@ public class ViewGerenciarProduto extends javax.swing.JFrame {
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btExcluir;
+    private javax.swing.JButton btFecharJanela;
     private javax.swing.JButton btVisualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

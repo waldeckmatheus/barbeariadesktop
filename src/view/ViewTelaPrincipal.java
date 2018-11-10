@@ -3,9 +3,11 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import model.bean.Funcionario;
+import model.dao.FuncionarioDao;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,13 +21,21 @@ import model.bean.Funcionario;
 public class ViewTelaPrincipal extends javax.swing.JFrame {
 
     private final Funcionario funcionario;
-
-    public ViewTelaPrincipal(Funcionario funcionario) {
+    private final FuncionarioDao funcionarioDao;
+    
+    public ViewTelaPrincipal(Funcionario funcionario) throws SQLException {
         this.funcionario = funcionario;
-        initComponents();
-        this.ajustarVisual();
+        this.funcionarioDao = new FuncionarioDao();
+        Funcionario funcionarioTmp = this.funcionarioDao.consultarByLoginSenha(this.funcionario.getFunLogin(), this.funcionario.getFunSenha());
+        if (Funcionario.funcionarioDevidamentePreenchido(funcionarioTmp)){
+            initComponents();
+            this.ajustarVisual();
+        }
+        else {
+            System.exit(0);
+        }
     }
-
+    
     private void ajustarVisual() {
         this.textDescricaoFuncaoUsuario.setText(this.funcionario.getFuncao().toUpperCase()+" - "+this.funcionario.getFunNome().toUpperCase());
         this.textDescricaoFuncaoUsuario.setEditable(false);

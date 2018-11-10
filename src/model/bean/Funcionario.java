@@ -68,6 +68,16 @@ public class Funcionario {
     public void setFuncao(String funcao) {
         this.funcao = funcao;
     }
-   
+   public static boolean funcionarioDevidamentePreenchido(Funcionario funcionario){
+        if (funcionario.getFunCod()!=null
+            && funcionario.getFunLogin()!=null
+                && funcionario.getFunNome()!=null 
+                    && funcionario.getFunPercent()!=null
+                        && funcionario.getFunSenha()!=null
+                            && funcionario.getFuncao()!=null){
+            return true;
+        }
+        return false;
+    }
     
 }

@@ -24,7 +24,7 @@ import utilitarios.KeyMappingUtil;
  */
 public class Login extends javax.swing.JFrame {
 
-    private FuncionarioDao funcionarioDAO;
+    private final FuncionarioDao funcionarioDAO;
 
     /**
      * Creates new form Login
@@ -69,7 +69,7 @@ public class Login extends javax.swing.JFrame {
         }
     }
 
-    public void inicializarTelaPrincipal(Funcionario funcionario) {
+    public void inicializarTelaPrincipal(Funcionario funcionario) throws SQLException {
         ViewTelaPrincipal l = new ViewTelaPrincipal(funcionario);
         l.setVisible(true);
     }
@@ -113,9 +113,9 @@ public class Login extends javax.swing.JFrame {
         lbtitulo.setBackground(new java.awt.Color(255, 255, 255));
         lbtitulo.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lbtitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lbtitulo.setText("BARBEARIA JB");
+        lbtitulo.setText("BARBEARIA JL");
         jPanel2.add(lbtitulo);
-        lbtitulo.setBounds(30, 10, 285, 43);
+        lbtitulo.setBounds(30, 10, 281, 43);
 
         jPanel4.add(jPanel2);
         jPanel2.setBounds(100, 60, 440, 80);
