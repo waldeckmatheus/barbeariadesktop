@@ -10,5 +10,10 @@ package utilitarios;
  * @author Equipe barbearia
  */
 public class KeyMappingUtil {
-    public static int KEY_ENTER = 10;
+    public static final int KEY_ENTER = 10;
+    
+    public static final int KEY_F1 = 112;
+    public static final int KEY_F2 = 113;
+    public static final int KEY_F3 = 114;
+    
 }

@@ -3,11 +3,15 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.bean.Funcionario;
 import model.dao.FuncionarioDao;
+import utilitarios.KeyMappingUtil;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,22 +26,49 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
 
     private final Funcionario funcionario;
     private final FuncionarioDao funcionarioDao;
-    
+
     public ViewTelaPrincipal(Funcionario funcionario) throws SQLException {
         this.funcionario = funcionario;
         this.funcionarioDao = new FuncionarioDao();
         Funcionario funcionarioTmp = this.funcionarioDao.consultarByLoginSenha(this.funcionario.getFunLogin(), this.funcionario.getFunSenha());
-        if (Funcionario.funcionarioDevidamentePreenchido(funcionarioTmp)){
+        if (Funcionario.funcionarioDevidamentePreenchido(funcionarioTmp)) {
             initComponents();
             this.ajustarVisual();
-        }
-        else {
+
+            this.addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    switch (e.getKeyCode()) {
+                        case KeyMappingUtil.KEY_F1:
+                            mostrarGerenciarCliente();
+                            break;
+                        case KeyMappingUtil.KEY_F2:
+                            mostrarGerenciarFuncionario();
+                            break;
+                        case KeyMappingUtil.KEY_F3:
+                            mostrarGerenciarProduto();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+        } else {
             System.exit(0);
         }
     }
-    
+
     private void ajustarVisual() {
-        this.textDescricaoFuncaoUsuario.setText(this.funcionario.getFuncao().toUpperCase()+" - "+this.funcionario.getFunNome().toUpperCase());
+        this.textDescricaoFuncaoUsuario.setText(this.funcionario.getFuncao().toUpperCase() + " - " + this.funcionario.getFunNome().toUpperCase());
         this.textDescricaoFuncaoUsuario.setEditable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         jMenuBar1.setBackground(new Color(255, 255, 255, 120));
@@ -175,22 +206,27 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.mostrarGerenciarCliente();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    public void mostrarGerenciarCliente() {
         ViewGerenciarCliente f = new ViewGerenciarCliente(funcionario);
         f.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
+    }
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
+        this.mostrarGerenciarFuncionario();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    public void mostrarGerenciarFuncionario() {
         ViewGerenciarFuncionario c = new ViewGerenciarFuncionario(funcionario);
         c.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    }
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        ViewGerenciarProduto c = new ViewGerenciarProduto(funcionario);
-        c.setVisible(true);
+        this.mostrarGerenciarProduto();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    public void mostrarGerenciarProduto() {
+        ViewGerenciarProduto c = new ViewGerenciarProduto(funcionario);
+        c.setVisible(true);
+    }
     private void textDescricaoFuncaoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDescricaoFuncaoUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textDescricaoFuncaoUsuarioActionPerformed
@@ -224,7 +260,7 @@ public class ViewTelaPrincipal extends javax.swing.JFrame {
 //                new ViewTelaPrincipal().setVisible(true);
 //            }
 //        });
-        
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
