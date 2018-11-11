@@ -23,5 +23,7 @@ ___________________________________________________________
 - git commit -m "Comentário relacionado ao commit"
 - git push -u origin master
 
-### Pull das alterações
+### Pull das alterações, fetch e checkout
 - git pull
+- git fetch
+- git checkout
